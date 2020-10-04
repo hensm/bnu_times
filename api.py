@@ -120,6 +120,11 @@ def get_timetable(student_id: str) -> Timetable:
     header_student_course = timetable_soup.select_one(".header-0-0-2")
     header_time = timetable_soup.select_one(".header-1-2-3")
 
+    if header_student_name is None or \
+       header_student_course is None or \
+       header_time is None:
+        return None
+
     (week_start, week_end) = map(
             lambda x: datetime.strptime(x, "%d %b %Y"),
             header_time.text.split("-"))
@@ -160,6 +165,9 @@ def get_timetable(student_id: str) -> Timetable:
             sheet_data.append(TimetableEntry(*cols))
 
         timetable_data_days.append(sheet_data)
+
+    if not len(timetable_data_days):
+        return None
 
     return Timetable(
             student_id=student_id,
