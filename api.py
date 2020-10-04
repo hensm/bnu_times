@@ -110,7 +110,7 @@ def get_timetable(student_id: str) -> Timetable:
         }))
 
     # The list timetable provides a week-by-week view with 7
-    # HTML tables containing the events Mon-Fri, all with the
+    # HTML tables containing the events Mon-Sun, all with the
     # same column info, so collect all the data into dataclasses
     # for export.
     timetable_soup = BeautifulSoup(res_timetable.content, "html.parser")
