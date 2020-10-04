@@ -77,9 +77,25 @@ body {
     text-decoration: initial;
 }
 
+.site-footer {
+    margin-top: 20px;
+}
+
 .site-footer > p {
     margin: initial;
-    text-align: center;
+}
+
+
+.timetable-form {
+    display: flex;
+}
+
+.timetable-form__input,
+.timetable-form__submit {
+    font: inherit;
+}
+.timetable-form__submit {
+    margin-left: 5px;
 }
 
 
@@ -188,4 +204,24 @@ body {
     list-style: none;
     padding: initial;
     display: flex;
+}
+
+
+@media (max-width: 500px) {
+    .timetable-form {
+        flex-direction: column;
+        width: 100%;
+    }
+    .timetable-form__input {
+        height: 40px;
+        padding: 10px;
+    }
+    .timetable-form__submit {
+        margin: initial;
+        margin-top: 5px;
+    }
+
+    .site-footer {
+        text-align: center;
+    }
 }

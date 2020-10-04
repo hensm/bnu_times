@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Index{% endblock %}
 {% block content %}
-<form class="form" action="/timetable">
-    <input class="form__student_id" type="text" name="student_id">
-    <input class="form__submit" type="submit" value="Get Timetable">
+<form class="timetable-form" action="/timetable">
+    <input class="timetable-form__input" type="text" name="student_id" placeholder="Student ID">
+    <input class="timetable-form__submit" type="submit" value="Get Timetable">
 </form>
 {% endblock %}
