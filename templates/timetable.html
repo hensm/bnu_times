@@ -6,7 +6,7 @@
     <div class="timetable__days">
         {% for day in days %}
             <div class="day">
-                <h3 class="day__name">{{ day.name }}</h2>
+                <h3 class="day__name">{{ day.name }}</h3>
                 {% if day.entries|length %}
                     <ul class="day__entries">
                         {% for entry in day.entries %}
