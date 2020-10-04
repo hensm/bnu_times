@@ -69,9 +69,10 @@ def ensure_valid_session_state():
     global session
     global session_res
 
-    # Only once
-    if session is not None:
-        return
+    # TODO: Fix session expiry issues
+    ## Only once
+    #if session is not None:
+    #    return
 
     session = requests.Session()
     initial_res = session.get(TIMETABLE_URL)
