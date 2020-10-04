@@ -1,0 +1,159 @@
+:root {
+    --system-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: var(--system-font);
+    font-size: 10px;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin: initial;
+}
+
+ul {
+    margin: initial;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: initial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.site-header,
+.site-content,
+.site-footer {
+    padding: 5px 10px;
+}
+
+.site-header {
+    align-items: center;
+    display: flex;
+    font-family: monospace;
+    gap: 10px;
+}
+
+.site-footer p {
+    margin: initial;
+    text-align: center;
+}
+
+
+.timetable__title {
+    margin-bottom: 10px;
+    background-color: black;
+    color: white;
+    width: calc(100% + 20px);
+    padding: 10px;
+    margin-left: -10px;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+    position: relative;
+    gap: 5px;
+}
+.day:not(:last-child) {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.25);
+    margin-bottom: 5px;
+}
+
+.day__name {
+    background-color: white;
+    font-size: 1.2em;
+    margin: initial;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+}
+.day__entries {
+    display: flex;
+    margin-left: -10px;
+    list-style: none;
+    overflow-x: auto;
+    padding: 10px;
+    padding-bottom: 15px;
+    scroll-padding: 10px;
+    scroll-snap-type: x mandatory;
+    width: calc(100% + 20px);
+}
+
+.entry:not(:last-child) {
+    margin-right: 10px;
+}
+
+.entry {
+    background-color: rgb(235, 235, 235);
+    border: 1px solid rgb(215, 215, 215);
+    flex: 0 0 250px;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    position: relative;
+    scroll-snap-align: start;
+}
+
+.entry__label {
+    opacity: 0.65;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.entry__type {
+    text-transform: uppercase;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.entry__time-place {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.entry__time {
+    margin-left: auto;
+    display: flex;
+    font-weight: 600;
+}
+
+.entry__room {
+    font-style: italic;
+    text-align: right;
+    width: 100%;
+}
+
+.entry__module {
+    font-size: 1.2em;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.entry__desc {
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.6)
+}
+
+.entry__staff {
+    margin-top: 10px;
+}
+
+.entry__staff > ul {
+    list-style: none;
+    padding: initial;
+    display: flex;
+}

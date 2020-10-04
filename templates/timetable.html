@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ student_name }} ({{ student_id }}){% endblock %}
+{% block content %}
+<div class="timetable">
+    <h2 class="timetable__title">{{ student_name }} ({{ student_id }})</h2>
+    <div class="timetable__days">
+        {% for day in days %}
+            <div class="day">
+                <h3 class="day__name">{{ day.name }}</h2>
+                {% if day.entries|length %}
+                    <ul class="day__entries">
+                        {% for entry in day.entries %}
+                            <li class="entry">
+                                <div class="entry__time-place">
+                                    <div class="entry__time">
+                                        <time class="entry__time-start"
+                                                datetime="{{ entry.time_start }}">
+                                            {{ entry.time_start.strftime("%H:%M") }}
+                                        </time>
+                                        -
+                                        <time class="entry__time-end"
+                                                datetime="{{ entry.time_end }}">
+                                            {{ entry.time_end.strftime("%H:%M") }}
+                                        </time>
+                                    </div>
+                                    <div class="entry__room">{{ entry.room.split()[0] }}</div>
+                                </div>
+                                <div class="entry__type">{{ entry.type }}</div>
+                                <div class="entry__module">{{ entry.name.split("/")[0] }}</div>
+                                <div class="entry__name">{{ entry.name }}</div>
+                                <div class="entry__desc">{{ entry.desc }}</div>
+                                <div class="entry__staff">
+                                    <ul>
+                                        {% for staff in entry.staff %}
+                                            <li>
+                                                {{ staff }}{{ ",&nbsp;"|safe if not loop.last }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>All free! 👍</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

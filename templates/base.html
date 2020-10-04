@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block head %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title>{% block title %}{% endblock %} | eb_times</title>
+        {% endblock %}
+    </head>
+    <body>
+        <header class="site-header">
+            <h1>🕒 eb_times</h1>
+        </header>
+        <main class="site-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer class="site-footer">
+            {% block footer %}
+            <p>
+                &copy; 2020 Matt Hensman
+            </p>
+            <p>
+                <a href="https://github.com/hensm/bucks-timetables">Source on GitHub</a>
+            </p>
+            {% endblock %}
+        </footer>
+    </body>
+</html>
