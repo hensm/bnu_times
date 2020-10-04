@@ -15,6 +15,9 @@ def index():
 @app.route("/timetable")
 def timetable():
     student_id = request.args.get("student_id", type=str)
+    if not student_id:
+        abort(400)
+
     timetable = api.get_timetable(student_id)
     if timetable is None:
         abort(400)

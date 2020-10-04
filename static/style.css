@@ -2,6 +2,26 @@
     --system-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-family: var(--system-font);
     font-size: 10px;
+
+    --color-bg: white;
+    --color-text: black;
+    --color-text2: rgb(45, 45, 45);
+    --color-link: rgb(60, 60, 60);
+    --color-link-visited: rgb(80, 80, 80);
+    --color-box: rgba(235, 235, 235);
+    --color-border: rgba(215, 215, 215);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: rgb(25, 25, 25);
+        --color-text: white;
+        --color-text2: rgb(200, 200, 200);
+        --color-link: rgb(180, 180, 180);
+        --color-link-visited: rgb(160, 160, 160);
+        --color-box: rgba(80, 80, 80);
+        --color-border: rgba(150, 150, 150);
+    }
 }
 
 body {
@@ -17,8 +37,19 @@ ul {
     margin: initial;
 }
 
+a {
+    color: var(--color-link);
+}
+a:hover {
+    color: var(--color-link);
+}
+a:visited {
+    color: var(--color-link-visited);
+}
 
 body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
     display: flex;
     flex-direction: column;
     margin: initial;
@@ -54,8 +85,8 @@ body {
 
 .timetable__title {
     margin-bottom: 10px;
-    background-color: black;
-    color: white;
+    background-color: var(--color-text);
+    color: var(--color-bg);
     width: calc(100% + 20px);
     padding: 10px;
     margin-left: -10px;
@@ -69,18 +100,14 @@ body {
     gap: 5px;
 }
 .day:not(:last-child) {
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.25);
+    border-bottom: 1px dashed var(--color-border);
     margin-bottom: 5px;
 }
 
 .day__name {
-    background-color: white;
     font-size: 1.2em;
     margin: initial;
     text-transform: uppercase;
-    position: sticky;
-    top: 0;
-    z-index: 1;
     width: 100%;
 }
 .day__entries {
@@ -100,8 +127,8 @@ body {
 }
 
 .entry {
-    background-color: rgb(235, 235, 235);
-    border: 1px solid rgb(215, 215, 215);
+    background-color: var(--color-box);
+    border: 1px solid var(--color-border);
     flex: 0 0 250px;
     flex-direction: column;
     gap: 5px;
@@ -150,7 +177,7 @@ body {
 }
 .entry__desc {
     font-size: 0.8em;
-    color: rgba(0, 0, 0, 0.6)
+    color: var(--color-text2);
 }
 
 .entry__staff {
