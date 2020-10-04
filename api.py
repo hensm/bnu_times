@@ -136,6 +136,9 @@ def get_timetable(student_id: str) -> Timetable:
             return datetime.combine(
                     time_day,
                     datetime.strptime(time_string, "%H:%M").time())
+        
+        def split_strip(string: str, sep=","):
+            return [ x.strip() for x in string.split(sep)]
 
         sheet_data = []
         for row in sheet.select("tr:not(.columnTitles)"):
@@ -152,9 +155,6 @@ def get_timetable(student_id: str) -> Timetable:
             # 8    staff       List of assigned staff
 
             cols = [ col.text for col in row.find_all("td") ]
-
-            def split_strip(col: str, sep=","):
-                return [ x.strip() for x in col.split(sep)]
 
             # Cleanup data
             cols[4] = parse_event_time(cols[4])
