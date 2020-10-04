@@ -1,33 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bucks Timetable API</title>
-    </head>
-    <body>
-        <h1>Bucks Timetable API</h1>
-        <p>Basic web-scraping API for <a href="https://mytimetable.bucks.ac.uk/">Timetables @ Bucks</a>.</p>
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+<h1>API</h1>
+<p>Basic web-scraping API for <a href="https://mytimetable.bucks.ac.uk/">Timetables @ Bucks</a>.</p>
 
-        <h2>Endpoints</h2>
-        <pre>
+<h2>Endpoints</h2>
+<pre>
 GET /timetable/:student_id
     Access the current week's timetable by student ID
-        </pre>
-        
-        <h2>Entry Format</h2>
-        <pre>
+</pre>
+
+<h2>Timetable Format</h2>
+<pre>
+{
+    "student_id": "01048596",
+    "student_name": "John Titor",
+    "student_course": "BSc (Hons) Software Engineering",
+    "days": [
+        [ <entry>, <entry>, ... ],
+        [ <entry>, ... ],
+        ...
+    ]
+}
+</pre>
+
+<h2>Entry Format</h2>
+<pre>
 {
     "desc": "CO456 PC Workshop",
     "module": "CO456/S1 Web Development",
     "name": "CO456/S1/PCWorkshop - Y/06",
     "room": "HW-G3.02 (PC - Computing Build - Sports) SD1",
-    "staff": "Prathna Singh",
+    "staff": ["Prathna Singh"],
     "time_end": "Wed, 30 Sep 2020 12:00:00 GMT",
     "time_start": "Wed, 30 Sep 2020 10:30:00 GMT",
     "type": "Computing",
-    "weeks": "1-12,  16-18"
+    "weeks": ["1-12", "16-18"]
 }
-        </pre>
-    </body>
-</html>
+</pre>
+{% endblock %}

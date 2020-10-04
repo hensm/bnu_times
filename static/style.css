@@ -41,7 +41,12 @@ body {
     gap: 10px;
 }
 
-.site-footer p {
+.site-title > a {
+    color: currentcolor;
+    text-decoration: initial;
+}
+
+.site-footer > p {
     margin: initial;
     text-align: center;
 }

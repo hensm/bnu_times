@@ -16,6 +16,8 @@ def index():
 def timetable():
     student_id = request.args.get("student_id", type=str)
     timetable = api.get_timetable(student_id)
+    if timetable is None:
+        abort(400)
     
     data_days = []
     for i, day in enumerate(timetable.days):
