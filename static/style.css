@@ -69,7 +69,6 @@ body {
     align-items: center;
     display: flex;
     font-family: monospace;
-    gap: 10px;
 }
 
 .site-title > a {
@@ -100,12 +99,13 @@ body {
 
 
 .timetable__title {
+    --padding: 10px;
     margin-bottom: 10px;
     background-color: var(--color-text);
     color: var(--color-bg);
-    width: calc(100% + 20px);
-    padding: 10px;
-    margin-left: -10px;
+    width: calc(100% + (var(--padding) * 2));
+    padding: var(--padding);
+    margin-left: calc(0px - var(--padding));
 }
 
 .day {
@@ -113,7 +113,6 @@ body {
     flex-direction: column;
     padding: 5px 0;
     position: relative;
-    gap: 5px;
 }
 .day:not(:last-child) {
     border-bottom: 1px dashed var(--color-border);
@@ -124,18 +123,32 @@ body {
     font-size: 1.2em;
     margin: initial;
     text-transform: uppercase;
-    width: 100%;
 }
+
+.day__date {
+    color: var(--color-text2);
+    margin: initial;
+}
+
 .day__entries {
+    --padding: 10px;
+    --padding-horiz: calc(var(--padding) * 2);
     display: flex;
-    margin-left: -10px;
+    margin-left: calc(0px - var(--padding));
     list-style: none;
     overflow-x: auto;
-    padding: 10px;
+    padding: var(--padding);
     padding-bottom: 15px;
-    scroll-padding: 10px;
+    padding-right: var(--padding-horiz);
+    scroll-padding: var(--padding);
     scroll-snap-type: x mandatory;
-    width: calc(100% + 20px);
+    width: calc(100% + var(--padding-horiz));
+}
+/* Add extra space to end */
+.day__entries::after {
+    content: "";
+    display: block;
+    min-width: var(--padding);
 }
 
 .entry:not(:last-child) {
@@ -145,9 +158,9 @@ body {
 .entry {
     background-color: var(--color-box);
     border: 1px solid var(--color-border);
+    display: flex;
     flex: 0 0 250px;
     flex-direction: column;
-    gap: 5px;
     padding: 10px;
     position: relative;
     scroll-snap-align: start;
@@ -197,7 +210,8 @@ body {
 }
 
 .entry__staff {
-    margin-top: 10px;
+    margin-top: auto;
+    padding-top: 10px;
 }
 
 .entry__staff > ul {

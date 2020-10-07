@@ -9,6 +9,7 @@ from typing import Dict, List, Union
 
 TIMETABLE_URL = "https://mytimetable.bucks.ac.uk"
 
+
 @dataclass
 class TimetableEntry:
     name: str
@@ -26,6 +27,7 @@ class Timetable:
     student_id: str
     student_name: str
     student_course: str
+    date_start: datetime.date
     days: List[List[TimetableEntry]]
 
 
@@ -51,12 +53,13 @@ def get_form_fields(content: bytes):
         fields[select["name"]] = [
             opt["value"] for opt in opts if opt.has_attr("selected")
         ]
-    
+
     return fields
 
 
 session: requests.Session = None
 session_res: requests.Response = None
+
 
 def ensure_valid_session_state():
     """
@@ -70,10 +73,6 @@ def ensure_valid_session_state():
     global session_res
 
     # TODO: Fix session expiry issues
-    ## Only once
-    #if session is not None:
-    #    return
-
     session = requests.Session()
     initial_res = session.get(TIMETABLE_URL)
 
@@ -126,20 +125,20 @@ def get_timetable(student_id: str) -> Timetable:
        header_time is None:
         return None
 
-    (week_start, week_end) = map(
-            lambda x: datetime.strptime(x, "%d %b %Y"),
-            header_time.text.split("-"))
+    week_start, _ = map(
+        lambda x: datetime.strptime(x, "%d %b %Y"),
+        header_time.text.split("-"))
 
     for day_index, sheet in enumerate(timetable_soup.select(".spreadsheet")):
         time_day = week_start + timedelta(days=day_index)
 
         def parse_event_time(time_string: str):
             return datetime.combine(
-                    time_day,
-                    datetime.strptime(time_string, "%H:%M").time())
-        
+                time_day,
+                datetime.strptime(time_string, "%H:%M").time())
+
         def split_strip(string: str, sep=","):
-            return [ x.strip() for x in string.split(sep)]
+            return [x.strip() for x in string.split(sep)]
 
         sheet_data = []
         for row in sheet.select("tr:not(.columnTitles)"):
@@ -155,7 +154,7 @@ def get_timetable(student_id: str) -> Timetable:
             # 7    room        Room string
             # 8    staff       List of assigned staff
 
-            cols = [ col.text for col in row.find_all("td") ]
+            cols = [col.text for col in row.find_all("td")]
 
             # Cleanup data
             cols[4] = parse_event_time(cols[4])
@@ -171,7 +170,8 @@ def get_timetable(student_id: str) -> Timetable:
         return None
 
     return Timetable(
-            student_id=student_id,
-            student_name=header_student_name.text,
-            student_course=header_student_course.text,
-            days=timetable_data_days)
+        student_id=student_id,
+        student_name=header_student_name.text,
+        student_course=header_student_course.text,
+        date_start=week_start.date(),
+        days=timetable_data_days)

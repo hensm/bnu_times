@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 {% block title %}{{ student_name }} ({{ student_id }}){% endblock %}
 {% block content %}
-<div class="timetable">
-    <h2 class="timetable__title">{{ student_name }} ({{ student_id }})</h2>
+<section class="timetable">
+    <header>
+        <h2 class="timetable__title">{{ student_name }} ({{ student_id }})</h2>
+    </header>
     <div class="timetable__days">
         {% for day in days %}
-            <div class="day">
-                <h3 class="day__name">{{ day.name }}</h3>
+            <section class="day">
+                <header>
+                    <h3 class="day__name">{{ day.name }}</h3>
+                    <p class="day__date">{{ day.date }}</p>
+                </header>
                 {% if day.entries|length %}
                     <ul class="day__entries">
                         {% for entry in day.entries %}
@@ -44,8 +49,8 @@
                 {% else %}
                     <p>All free! 👍</p>
                 {% endif %}
-            </div>
+            </section>
         {% endfor %}
     </div>
-</div>
+</section>
 {% endblock %}
