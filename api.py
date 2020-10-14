@@ -4,6 +4,7 @@ import sys
 from bs4 import BeautifulSoup
 from dataclasses import dataclass, asdict
 from datetime import datetime, timedelta
+from enum import Enum
 from typing import Dict, List, Union
 
 
@@ -86,7 +87,11 @@ def ensure_valid_session_state():
         }))
 
 
-def get_timetable(student_id: str) -> Timetable:
+class Week(Enum):
+    Current = "t"
+    Next = "n"
+
+def get_timetable(student_id: str, week: Week) -> Timetable:
     """
     Makes a request for the timetable with a given student ID.
     """
@@ -104,7 +109,7 @@ def get_timetable(student_id: str) -> Timetable:
         **{
             "__EVENTTARGET": "tObjectInput",
             "tObjectInput": student_id,
-            "lbWeeks": "t",
+            "lbWeeks": week.value,
             "lbDays": "1-7",
             "dlType": "TextSpreadsheet;swsurl;SWSNET Student TextSpreadsheet"
         }))

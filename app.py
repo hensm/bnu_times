@@ -15,11 +15,15 @@ def index():
 
 @app.route("/timetable")
 def timetable():
-    student_id = request.args.get("student_id", type=str)
-    if not student_id:
-        abort(400)
+    param_student_id = request.args.get("student_id", type=str)
+    param_week = request.args.get("week", type=str)
 
-    timetable = api.get_timetable(student_id)
+    if not param_student_id:
+        abort(400)
+    
+    week = api.Week(param_week) if param_week else api.Week.Current
+
+    timetable = api.get_timetable(param_student_id, week)
     if timetable is None:
         abort(400)
     
@@ -51,7 +55,7 @@ def about():
 
 @app.route("/api/timetable/<student_id>")
 def api_timetable(student_id):
-    timetable = api.get_timetable(student_id)
+    timetable = api.get_timetable(student_id, api.Week.Current)
     if timetable is None:
         abort(400)
 
